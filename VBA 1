@@ -1,0 +1,62 @@
+Public Class Form1
+    Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
+        Dim Result As DialogResult
+        Result = MessageBox.Show("Are you sure?", "Eixt", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+        If Result = System.Windows.Forms.DialogResult.Yes Then
+        End If
+        Me.Close()
+
+    End Sub
+
+    Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
+        Dim Result As DialogResult
+        Result = MessageBox.Show("Are you sure", "Clear", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If Result = System.Windows.Forms.DialogResult.Yes Then
+            NumberTextBox.Clear()
+            ThereforeTextBox.Clear()
+        End If
+
+
+    End Sub
+
+    Private Sub ComputeButton_Click(sender As Object, e As EventArgs) Handles ComputeButton.Click
+        Dim Number = NumberTextBox.Text
+        Dim counter As Integer
+        Dim sum_of_divisors As Integer
+
+        If IsNumeric(NumberTextBox.Text) = True Then
+
+
+            If NumberTextBox.Text <= 0 Then
+                MessageBox.Show("Number cannot be negative", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ElseIf NumberTextBox.Text > 0 Then
+                For counter = 1 To (Number - 1) Step 1
+                    If (Number Mod counter = 0) Then
+                        sum_of_divisors += counter
+                    End If
+                Next
+
+                If sum_of_divisors = Number Then
+                    ThereforeTextBox.Text = "Perfect Number"
+                ElseIf sum_of_divisors < Number Then
+                    ThereforeTextBox.Text = "Defecient Number"
+                ElseIf sum_of_divisors > Number Then
+                    ThereforeTextBox.Text = "Abundant Number"
+                End If
+
+
+
+            End If
+        Else
+            Dim Inputresult As DialogResult
+            Inputresult = MessageBox.Show("Input Number", "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error)
+            If Inputresult = DialogResult.Retry Then
+                NumberTextBox.Clear()
+
+            End If
+
+        End If
+
+
+    End Sub
+End Class
